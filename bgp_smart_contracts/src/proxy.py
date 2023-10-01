@@ -20,7 +20,7 @@ from Classes.Account import Account
 import os, sys
 import datetime
 import subprocess
-from pymongo import MongoClient
+import pymongo
 
 
 ACCEPT_UNREGISTERED_ADVERTISEMENTS = True # set to False to remove all advertisements that are not registered
@@ -38,13 +38,17 @@ os.system("iptables -I INPUT -p tcp --sport 179 -j NFQUEUE --queue-num {}".forma
 os.system("iptables -I OUTPUT -p tcp --dport 179 -j NFQUEUE --queue-num {}".format(QUEUE_NUM))
 os.system("iptables -I OUTPUT -p tcp --sport 179 -j NFQUEUE --queue-num {}".format(QUEUE_NUM))
 
+client = pymongo.MongoClient('10.3.0.3', 27017)
+db = client["bgp_db"]
+collection = db["known_bgp"]
+
 def get_datetime():
     return datetime.datetime.now()
 
 old_print = print
 
 #Set the default mongoclient to ix3
-client = MongoClient('10.3.0.3', 27017)
+#client = MongoClient('10.3.0.3', 27017
 
 def pkt_in(packet):
     local_index = global_index.incr_index()
