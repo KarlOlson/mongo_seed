@@ -1,11 +1,11 @@
-import pymongo
-from Utils.Utils import *
-from ipaddress import IPv4Address
+#import pymongo
+#from Utils.Utils import *
+#from ipaddress import IPv4Address
 
 
-client = pymongo.MongoClient('10.3.0.3', 27017)
-db = client["bgp_db"]
-collection = db["known_bgp"]
+#client = pymongo.MongoClient('10.3.0.3', 27017)
+#db = client["bgp_db"]
+#collection = db["known_bgp"]
 
 def db_validate(segment):
 
