@@ -1,0 +1,14 @@
+{
+  "container": {
+    "labels": {
+      "asn": "85",
+      "nodename": "r2",
+      "role": "Router",
+      "net0_name": "ix2",
+      "net0_address": "10.2.0.85/24",
+      "net1_name": "net_2_81",
+      "net1_address": "10.85.0.254/24",
+      "build": "rnode_85_r2"
+    }
+  }
+}

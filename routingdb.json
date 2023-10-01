@@ -1,0 +1,1216 @@
+{
+  "containers": [
+    {
+      "labels": {
+        "asn": "85",
+        "nodename": "r2",
+        "role": "Router",
+        "net0_name": "ix2",
+        "net0_address": "10.2.0.85/24",
+        "net1_name": "net_2_81",
+        "net1_address": "10.85.0.254/24",
+        "build": "rnode_85_r2"
+      }
+    },
+    {
+      "labels": {
+        "asn": "85",
+        "nodename": "r81",
+        "role": "Router",
+        "net0_name": "ix81",
+        "net0_address": "10.81.0.85/24",
+        "net1_name": "net_2_81",
+        "net1_address": "10.85.0.253/24",
+        "build": "rnode_85_r81"
+      }
+    },
+    {
+      "labels": {
+        "asn": "86",
+        "nodename": "r2",
+        "role": "Router",
+        "net0_name": "ix2",
+        "net0_address": "10.2.0.86/24",
+        "net1_name": "net_2_11",
+        "net1_address": "10.86.0.254/24",
+        "build": "rnode_86_r2"
+      }
+    },
+    {
+      "labels": {
+        "asn": "86",
+        "nodename": "r11",
+        "role": "Router",
+        "net0_name": "ix11",
+        "net0_address": "10.11.0.86/24",
+        "net1_name": "net_2_11",
+        "net1_address": "10.86.0.253/24",
+        "build": "rnode_86_r11"
+      }
+    },
+    {
+      "labels": {
+        "asn": "91",
+        "nodename": "r12",
+        "role": "Router",
+        "net0_name": "ix12",
+        "net0_address": "10.12.0.91/24",
+        "net1_name": "net_12_20",
+        "net1_address": "10.91.0.254/24",
+        "build": "rnode_91_r12"
+      }
+    },
+    {
+      "labels": {
+        "asn": "91",
+        "nodename": "r20",
+        "role": "Router",
+        "net0_name": "ix20",
+        "net0_address": "10.20.0.91/24",
+        "net1_name": "net_12_20",
+        "net1_address": "10.91.0.253/24",
+        "build": "rnode_91_r20"
+      }
+    },
+    {
+      "labels": {
+        "asn": "92",
+        "nodename": "r6",
+        "role": "Router",
+        "net0_name": "ix6",
+        "net0_address": "10.6.0.92/24",
+        "net1_name": "net_6_12",
+        "net1_address": "10.92.0.254/24",
+        "build": "rnode_92_r6"
+      }
+    },
+    {
+      "labels": {
+        "asn": "92",
+        "nodename": "r12",
+        "role": "Router",
+        "net0_name": "ix12",
+        "net0_address": "10.12.0.92/24",
+        "net1_name": "net_6_12",
+        "net1_address": "10.92.0.253/24",
+        "build": "rnode_92_r12"
+      }
+    },
+    {
+      "labels": {
+        "asn": "93",
+        "nodename": "r12",
+        "role": "Router",
+        "net0_name": "ix12",
+        "net0_address": "10.12.0.93/24",
+        "net1_name": "net_12_81",
+        "net1_address": "10.93.0.254/24",
+        "build": "rnode_93_r12"
+      }
+    },
+    {
+      "labels": {
+        "asn": "93",
+        "nodename": "r81",
+        "role": "Router",
+        "net0_name": "ix81",
+        "net0_address": "10.81.0.93/24",
+        "net1_name": "net_12_81",
+        "net1_address": "10.93.0.253/24",
+        "build": "rnode_93_r81"
+      }
+    },
+    {
+      "labels": {
+        "asn": "94",
+        "nodename": "r12",
+        "role": "Router",
+        "net0_name": "ix12",
+        "net0_address": "10.12.0.94/24",
+        "net1_name": "net_12_3",
+        "net1_address": "10.94.0.254/24",
+        "build": "rnode_94_r12"
+      }
+    },
+    {
+      "labels": {
+        "asn": "94",
+        "nodename": "r3",
+        "role": "Router",
+        "net0_name": "ix3",
+        "net0_address": "10.3.0.94/24",
+        "net1_name": "net_12_3",
+        "net1_address": "10.94.0.253/24",
+        "build": "rnode_94_r3"
+      }
+    },
+    {
+      "labels": {
+        "asn": "95",
+        "nodename": "r17",
+        "role": "Router",
+        "net0_name": "ix17",
+        "net0_address": "10.17.0.95/24",
+        "net1_name": "net_17_10",
+        "net1_address": "10.95.0.254/24",
+        "build": "rnode_95_r17"
+      }
+    },
+    {
+      "labels": {
+        "asn": "95",
+        "nodename": "r10",
+        "role": "Router",
+        "net0_name": "ix10",
+        "net0_address": "10.10.0.95/24",
+        "net1_name": "net_17_10",
+        "net1_address": "10.95.0.253/24",
+        "build": "rnode_95_r10"
+      }
+    },
+    {
+      "labels": {
+        "asn": "110",
+        "nodename": "r10",
+        "role": "Router",
+        "net0_name": "ix10",
+        "net0_address": "10.10.0.110/24",
+        "net1_name": "net_10_2",
+        "net1_address": "10.110.0.254/24",
+        "build": "rnode_110_r10"
+      }
+    },
+    {
+      "labels": {
+        "asn": "110",
+        "nodename": "r2",
+        "role": "Router",
+        "net0_name": "ix2",
+        "net0_address": "10.2.0.110/24",
+        "net1_name": "net_10_2",
+        "net1_address": "10.110.0.253/24",
+        "build": "rnode_110_r2"
+      }
+    },
+    {
+      "labels": {
+        "asn": "112",
+        "nodename": "r18",
+        "role": "Router",
+        "net0_name": "ix18",
+        "net0_address": "10.18.0.112/24",
+        "net1_name": "net_18_9",
+        "net1_address": "10.112.0.254/24",
+        "build": "rnode_112_r18"
+      }
+    },
+    {
+      "labels": {
+        "asn": "112",
+        "nodename": "r9",
+        "role": "Router",
+        "net0_name": "ix9",
+        "net0_address": "10.9.0.112/24",
+        "net1_name": "net_18_9",
+        "net1_address": "10.112.0.253/24",
+        "build": "rnode_112_r9"
+      }
+    },
+    {
+      "labels": {
+        "asn": "113",
+        "nodename": "r9",
+        "role": "Router",
+        "net0_name": "ix9",
+        "net0_address": "10.9.0.113/24",
+        "net1_name": "net_9_17",
+        "net1_address": "10.113.0.254/24",
+        "build": "rnode_113_r9"
+      }
+    },
+    {
+      "labels": {
+        "asn": "113",
+        "nodename": "r17",
+        "role": "Router",
+        "net0_name": "ix17",
+        "net0_address": "10.17.0.113/24",
+        "net1_name": "net_9_17",
+        "net1_address": "10.113.0.253/24",
+        "build": "rnode_113_r17"
+      }
+    },
+    {
+      "labels": {
+        "asn": "114",
+        "nodename": "r8",
+        "role": "Router",
+        "net0_name": "ix8",
+        "net0_address": "10.8.0.114/24",
+        "net1_name": "net_8_5",
+        "net1_address": "10.114.0.254/24",
+        "build": "rnode_114_r8"
+      }
+    },
+    {
+      "labels": {
+        "asn": "114",
+        "nodename": "r5",
+        "role": "Router",
+        "net0_name": "ix5",
+        "net0_address": "10.5.0.114/24",
+        "net1_name": "net_8_5",
+        "net1_address": "10.114.0.253/24",
+        "build": "rnode_114_r5"
+      }
+    },
+    {
+      "labels": {
+        "asn": "115",
+        "nodename": "r17",
+        "role": "Router",
+        "net0_name": "ix17",
+        "net0_address": "10.17.0.115/24",
+        "net1_name": "net_17_16",
+        "net1_address": "10.115.0.254/24",
+        "build": "rnode_115_r17"
+      }
+    },
+    {
+      "labels": {
+        "asn": "115",
+        "nodename": "r16",
+        "role": "Router",
+        "net0_name": "ix16",
+        "net0_address": "10.16.0.115/24",
+        "net1_name": "net_17_16",
+        "net1_address": "10.115.0.253/24",
+        "build": "rnode_115_r16"
+      }
+    },
+    {
+      "labels": {
+        "asn": "116",
+        "nodename": "r16",
+        "role": "Router",
+        "net0_name": "ix16",
+        "net0_address": "10.16.0.116/24",
+        "net1_name": "net_16_8",
+        "net1_address": "10.116.0.254/24",
+        "build": "rnode_116_r16"
+      }
+    },
+    {
+      "labels": {
+        "asn": "116",
+        "nodename": "r8",
+        "role": "Router",
+        "net0_name": "ix8",
+        "net0_address": "10.8.0.116/24",
+        "net1_name": "net_16_8",
+        "net1_address": "10.116.0.253/24",
+        "build": "rnode_116_r8"
+      }
+    },
+    {
+      "labels": {
+        "asn": "135",
+        "nodename": "r8",
+        "role": "Router",
+        "net0_name": "ix8",
+        "net0_address": "10.8.0.135/24",
+        "net1_name": "net_8_15",
+        "net1_address": "10.135.0.254/24",
+        "build": "rnode_135_r8"
+      }
+    },
+    {
+      "labels": {
+        "asn": "135",
+        "nodename": "r15",
+        "role": "Router",
+        "net0_name": "ix15",
+        "net0_address": "10.15.0.135/24",
+        "net1_name": "net_8_15",
+        "net1_address": "10.135.0.253/24",
+        "build": "rnode_135_r15"
+      }
+    },
+    {
+      "labels": {
+        "asn": "136",
+        "nodename": "r81",
+        "role": "Router",
+        "net0_name": "ix81",
+        "net0_address": "10.81.0.136/24",
+        "net1_name": "net_81_4",
+        "net1_address": "10.136.0.254/24",
+        "build": "rnode_136_r81"
+      }
+    },
+    {
+      "labels": {
+        "asn": "136",
+        "nodename": "r4",
+        "role": "Router",
+        "net0_name": "ix4",
+        "net0_address": "10.4.0.136/24",
+        "net1_name": "net_81_4",
+        "net1_address": "10.136.0.253/24",
+        "build": "rnode_136_r4"
+      }
+    },
+    {
+      "labels": {
+        "asn": "137",
+        "nodename": "r7",
+        "role": "Router",
+        "net0_name": "ix7",
+        "net0_address": "10.7.0.137/24",
+        "net1_name": "net_7_14",
+        "net1_address": "10.137.0.254/24",
+        "build": "rnode_137_r7"
+      }
+    },
+    {
+      "labels": {
+        "asn": "137",
+        "nodename": "r14",
+        "role": "Router",
+        "net0_name": "ix14",
+        "net0_address": "10.14.0.137/24",
+        "net1_name": "net_7_14",
+        "net1_address": "10.137.0.253/24",
+        "build": "rnode_137_r14"
+      }
+    },
+    {
+      "labels": {
+        "asn": "138",
+        "nodename": "r4",
+        "role": "Router",
+        "net0_name": "ix4",
+        "net0_address": "10.4.0.138/24",
+        "net1_name": "net_4_14",
+        "net1_address": "10.138.0.254/24",
+        "build": "rnode_138_r4"
+      }
+    },
+    {
+      "labels": {
+        "asn": "138",
+        "nodename": "r14",
+        "role": "Router",
+        "net0_name": "ix14",
+        "net0_address": "10.14.0.138/24",
+        "net1_name": "net_4_14",
+        "net1_address": "10.138.0.253/24",
+        "build": "rnode_138_r14"
+      }
+    },
+    {
+      "labels": {
+        "asn": "153",
+        "nodename": "r7",
+        "role": "Router",
+        "net0_name": "ix7",
+        "net0_address": "10.7.0.153/24",
+        "net1_name": "net_7_19",
+        "net1_address": "10.153.0.254/24",
+        "build": "rnode_153_r7"
+      }
+    },
+    {
+      "labels": {
+        "asn": "153",
+        "nodename": "r19",
+        "role": "Router",
+        "net0_name": "ix19",
+        "net0_address": "10.19.0.153/24",
+        "net1_name": "net_7_19",
+        "net1_address": "10.153.0.253/24",
+        "build": "rnode_153_r19"
+      }
+    },
+    {
+      "labels": {
+        "asn": "154",
+        "nodename": "r13",
+        "role": "Router",
+        "net0_name": "ix13",
+        "net0_address": "10.13.0.154/24",
+        "net1_name": "net_13_3",
+        "net1_address": "10.154.0.254/24",
+        "build": "rnode_154_r13"
+      }
+    },
+    {
+      "labels": {
+        "asn": "154",
+        "nodename": "r3",
+        "role": "Router",
+        "net0_name": "ix3",
+        "net0_address": "10.3.0.154/24",
+        "net1_name": "net_13_3",
+        "net1_address": "10.154.0.253/24",
+        "build": "rnode_154_r3"
+      }
+    },
+    {
+      "labels": {
+        "asn": "249",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.249.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_249_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "249",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.249.0.254/24",
+        "net1_name": "ix81",
+        "net1_address": "10.81.0.249/24",
+        "build": "rnode_249_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "170",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.170.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_170_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "170",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.170.0.254/24",
+        "net1_name": "ix2",
+        "net1_address": "10.2.0.170/24",
+        "build": "rnode_170_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "171",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.171.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_171_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "171",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.171.0.254/24",
+        "net1_name": "ix3",
+        "net1_address": "10.3.0.171/24",
+        "build": "rnode_171_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "172",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.172.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_172_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "172",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.172.0.254/24",
+        "net1_name": "ix4",
+        "net1_address": "10.4.0.172/24",
+        "build": "rnode_172_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "173",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.173.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_173_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "173",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.173.0.254/24",
+        "net1_name": "ix5",
+        "net1_address": "10.5.0.173/24",
+        "build": "rnode_173_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "174",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.174.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_174_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "174",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.174.0.254/24",
+        "net1_name": "ix6",
+        "net1_address": "10.6.0.174/24",
+        "build": "rnode_174_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "175",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.175.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_175_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "175",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.175.0.254/24",
+        "net1_name": "ix7",
+        "net1_address": "10.7.0.175/24",
+        "build": "rnode_175_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "176",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.176.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_176_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "176",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.176.0.254/24",
+        "net1_name": "ix8",
+        "net1_address": "10.8.0.176/24",
+        "build": "rnode_176_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "177",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.177.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_177_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "177",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.177.0.254/24",
+        "net1_name": "ix9",
+        "net1_address": "10.9.0.177/24",
+        "build": "rnode_177_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "178",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.178.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_178_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "178",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.178.0.254/24",
+        "net1_name": "ix10",
+        "net1_address": "10.10.0.178/24",
+        "build": "rnode_178_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "179",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.179.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_179_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "179",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.179.0.254/24",
+        "net1_name": "ix11",
+        "net1_address": "10.11.0.179/24",
+        "build": "rnode_179_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "180",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.180.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_180_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "180",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.180.0.254/24",
+        "net1_name": "ix12",
+        "net1_address": "10.12.0.180/24",
+        "build": "rnode_180_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "181",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.181.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_181_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "181",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.181.0.254/24",
+        "net1_name": "ix13",
+        "net1_address": "10.13.0.181/24",
+        "build": "rnode_181_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "182",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.182.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_182_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "182",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.182.0.254/24",
+        "net1_name": "ix14",
+        "net1_address": "10.14.0.182/24",
+        "build": "rnode_182_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "183",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.183.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_183_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "183",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.183.0.254/24",
+        "net1_name": "ix15",
+        "net1_address": "10.15.0.183/24",
+        "build": "rnode_183_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "184",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.184.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_184_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "184",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.184.0.254/24",
+        "net1_name": "ix16",
+        "net1_address": "10.16.0.184/24",
+        "build": "rnode_184_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "185",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.185.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_185_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "185",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.185.0.254/24",
+        "net1_name": "ix17",
+        "net1_address": "10.17.0.185/24",
+        "build": "rnode_185_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "186",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.186.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_186_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "186",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.186.0.254/24",
+        "net1_name": "ix18",
+        "net1_address": "10.18.0.186/24",
+        "build": "rnode_186_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "187",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.187.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_187_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "187",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.187.0.254/24",
+        "net1_name": "ix19",
+        "net1_address": "10.19.0.187/24",
+        "build": "rnode_187_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "188",
+        "nodename": "host_0",
+        "role": "Host",
+        "net0_name": "net0",
+        "net0_address": "10.188.0.71/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "hnode_188_host_0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "188",
+        "nodename": "router0",
+        "role": "Router",
+        "net0_name": "net0",
+        "net0_address": "10.188.0.254/24",
+        "net1_name": "ix20",
+        "net1_address": "10.20.0.188/24",
+        "build": "rnode_188_router0"
+      }
+    },
+    {
+      "labels": {
+        "asn": "11872",
+        "nodename": "rw",
+        "role": "Router",
+        "net0_name": "ix2",
+        "net0_address": "10.2.0.118/24",
+        "net1_name": "000_svc",
+        "net1_address": "192.168.160.254/23",
+        "build": "rnode_11872_rw"
+      }
+    },
+    {
+      "labels": {
+        "asn": "81",
+        "nodename": "ix81",
+        "role": "Route Server",
+        "net0_name": "ix81",
+        "net0_address": "10.81.0.81/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix81"
+      }
+    },
+    {
+      "labels": {
+        "asn": "2",
+        "nodename": "ix2",
+        "role": "Route Server",
+        "net0_name": "ix2",
+        "net0_address": "10.2.0.2/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix2"
+      }
+    },
+    {
+      "labels": {
+        "asn": "3",
+        "nodename": "ix3",
+        "role": "Route Server",
+        "net0_name": "ix3",
+        "net0_address": "10.3.0.3/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix3"
+      }
+    },
+    {
+      "labels": {
+        "asn": "4",
+        "nodename": "ix4",
+        "role": "Route Server",
+        "net0_name": "ix4",
+        "net0_address": "10.4.0.4/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix4"
+      }
+    },
+    {
+      "labels": {
+        "asn": "5",
+        "nodename": "ix5",
+        "role": "Route Server",
+        "net0_name": "ix5",
+        "net0_address": "10.5.0.5/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix5"
+      }
+    },
+    {
+      "labels": {
+        "asn": "6",
+        "nodename": "ix6",
+        "role": "Route Server",
+        "net0_name": "ix6",
+        "net0_address": "10.6.0.6/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix6"
+      }
+    },
+    {
+      "labels": {
+        "asn": "7",
+        "nodename": "ix7",
+        "role": "Route Server",
+        "net0_name": "ix7",
+        "net0_address": "10.7.0.7/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix7"
+      }
+    },
+    {
+      "labels": {
+        "asn": "8",
+        "nodename": "ix8",
+        "role": "Route Server",
+        "net0_name": "ix8",
+        "net0_address": "10.8.0.8/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix8"
+      }
+    },
+    {
+      "labels": {
+        "asn": "9",
+        "nodename": "ix9",
+        "role": "Route Server",
+        "net0_name": "ix9",
+        "net0_address": "10.9.0.9/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix9"
+      }
+    },
+    {
+      "labels": {
+        "asn": "10",
+        "nodename": "ix10",
+        "role": "Route Server",
+        "net0_name": "ix10",
+        "net0_address": "10.10.0.10/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix10"
+      }
+    },
+    {
+      "labels": {
+        "asn": "11",
+        "nodename": "ix11",
+        "role": "Route Server",
+        "net0_name": "ix11",
+        "net0_address": "10.11.0.11/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix11"
+      }
+    },
+    {
+      "labels": {
+        "asn": "12",
+        "nodename": "ix12",
+        "role": "Route Server",
+        "net0_name": "ix12",
+        "net0_address": "10.12.0.12/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix12"
+      }
+    },
+    {
+      "labels": {
+        "asn": "13",
+        "nodename": "ix13",
+        "role": "Route Server",
+        "net0_name": "ix13",
+        "net0_address": "10.13.0.13/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix13"
+      }
+    },
+    {
+      "labels": {
+        "asn": "14",
+        "nodename": "ix14",
+        "role": "Route Server",
+        "net0_name": "ix14",
+        "net0_address": "10.14.0.14/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix14"
+      }
+    },
+    {
+      "labels": {
+        "asn": "15",
+        "nodename": "ix15",
+        "role": "Route Server",
+        "net0_name": "ix15",
+        "net0_address": "10.15.0.15/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix15"
+      }
+    },
+    {
+      "labels": {
+        "asn": "16",
+        "nodename": "ix16",
+        "role": "Route Server",
+        "net0_name": "ix16",
+        "net0_address": "10.16.0.16/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix16"
+      }
+    },
+    {
+      "labels": {
+        "asn": "17",
+        "nodename": "ix17",
+        "role": "Route Server",
+        "net0_name": "ix17",
+        "net0_address": "10.17.0.17/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix17"
+      }
+    },
+    {
+      "labels": {
+        "asn": "18",
+        "nodename": "ix18",
+        "role": "Route Server",
+        "net0_name": "ix18",
+        "net0_address": "10.18.0.18/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix18"
+      }
+    },
+    {
+      "labels": {
+        "asn": "19",
+        "nodename": "ix19",
+        "role": "Route Server",
+        "net0_name": "ix19",
+        "net0_address": "10.19.0.19/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix19"
+      }
+    },
+    {
+      "labels": {
+        "asn": "20",
+        "nodename": "ix20",
+        "role": "Route Server",
+        "net0_name": "ix20",
+        "net0_address": "10.20.0.20/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix20"
+      }
+    },    
+    {
+      "labels": {
+        "asn": "69",
+        "nodename": "r6_proxy",
+        "role": "Router",
+        "net0_name": "ix6",
+        "net0_address": "10.6.0.69/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix6"
+      }
+    },
+    {
+      "labels": {
+        "asn": "21",
+        "nodename": "ix21",
+        "role": "Route Server",
+        "net0_name": "ix21",
+        "net0_address": "10.21.0.21/24",
+        "net1_name": null,
+        "net1_address": null,
+        "build": "rs_ix_ix21"
+      } 
+    }
+    ]
+    }
