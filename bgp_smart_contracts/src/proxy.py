@@ -180,14 +180,14 @@ def db_validate(segment):
     
     # tx_sender.generate_transaction_object("IANA", "IANA_CONTRACT_ADDRESS")
     # print("Transaction setup complete for: " + tx_sender_name)
-    
-    ret = collection.find({'labels.net_0_address': str(inIP) + "/" + str(inSubnet)})
+    ret=collection.find_one({'labels.net1_address': str(inIP) + "/" + str(inSubnet)},{'labels.asn':1})
+    #ret = collection.find({'labels.net_0_address': str(inIP) + "/" + str(inSubnet)})
     
     validASN = ""
-
-    for object in ret:
-        print(object)
-        validASN = object.get("asn")
+    validASN=ret['labels']['asn']
+   # for object in ret:
+       # print(object)
+       # validASN = object.get("asn")
 
     if validASN == "":
         print ("Prefix not registered")
