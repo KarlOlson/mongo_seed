@@ -1,7 +1,6 @@
 [
-   {"asn": "85"{"net1_address": "10.85.0.0/24"}},
-   {"asn": "86"{"net1_address": "10.86.0.0/24"}},
-   {"asn": "91"{"net1_address": "10.91.0.0/24"}},
+   {"labels": {"asn": "85", "net1_address": "10.85.0.0/24" }},
+   {"labels": {"asn": "86", "net1_address": "10.86.0.0/24" }},
    {"labels": {"asn": "91", "net1_address": "10.91.0.0/24" }},
    {"labels": {"asn": "92", "net1_address": "10.92.0.0/24" }},
    {"labels": {"asn": "93", "net1_address": "10.93.0.0/24" }},
