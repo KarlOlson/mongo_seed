@@ -181,18 +181,25 @@ def db_validate(segment):
     # tx_sender.generate_transaction_object("IANA", "IANA_CONTRACT_ADDRESS")
     # print("Transaction setup complete for: " + tx_sender_name)
     ret=collection.find_one({'labels.net1_address': str(inIP) + "/" + str(inSubnet)},{'labels.asn':1})
-    #ret = collection.find({'labels.net_0_address': str(inIP) + "/" + str(inSubnet)})
-    
+    #ret = collection.find({'labels.net_0_address': str(inIP) + "/" + str(inSubnet
+    print('retrieved db info') 
+    print(ret)
     validASN = ""
-    validASN=ret['labels']['asn']
-   # for object in ret:
-       # print(object)
-       # validASN = object.get("asn")
-
+  
+    try:
+       validASN=ret['labels']['asn']
+       print(str(validASN)+'this is output of try')
+       print(str(inASN)+' vs. '+ str(validASN))
+    except:
+       print('No Match Found - Except')
+       validASN=""
+        
+    print('entering final comparison')
+    
     if validASN == "":
         print ("Prefix not registered")
         return (validatePrefixResult.prefixNotRegistered)
-    elif validASN == inASN: #better approach
+    elif str(validASN) == str(inASN): #better approach
         print ("Prefix is valid")
         return (validatePrefixResult.prefixValid)
     else:
