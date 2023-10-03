@@ -20,7 +20,7 @@
    {"labels": {"asn": "154", "net1_address": "10.154.0.0/24" }},
    {"labels": {"asn": "249", "net1_address": "10.249.0.0/24" }},
    {"labels": {"asn": "170", "net1_address": "10.170.0.0/24" }},
-   {"labels": {"asn": "171", "net1_address": "10.172.0.0/24" }},
+   {"labels": {"asn": "171", "net1_address": "10.171.0.0/24" }},
    {"labels": {"asn": "173", "net1_address": "10.173.0.0/24" }},
    {"labels": {"asn": "174", "net1_address": "10.174.0.0/24" }},
    {"labels": {"asn": "175", "net1_address": "10.175.0.0/24" }},
