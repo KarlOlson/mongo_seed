@@ -14,7 +14,7 @@ from Classes.PacketProcessing.Index import Index
 from Classes.PacketProcessing.ConnectionTracker import ConnectionTracker
 from Classes.PacketProcessing.FiveTuple import FiveTuple
 from Classes.PacketProcessing.FlowDirection import FlowDirection
-#from Classes.PacketProcessing.DatabaseValidation import db_validate
+from Classes.PacketProcessing.DatabaseValidation import db_validate
 from ipaddress import IPv4Address
 from Classes.Account import Account
 import os, sys
@@ -28,7 +28,14 @@ ACCEPT_UNREGISTERED_ADVERTISEMENTS = True # set to False to remove all advertise
 global_index = None
 connections = None
 
-load_contrib('bgp') #scapy does not automatically load items from Contrib. Must call function and module name to load.
+#scapy does not automatically load items from Contrib. Must call function and module name to load.
+load_contrib('bgp') 
+
+#establish connection to mongo db for validation
+client = pymongo.MongoClient('10.3.0.3', 27017)
+#db = client["bgp_db"]
+#collection = db["known_bgp"]
+collection=client["bgp_db"]["known_bgp"]
 
 ################Establishes local IPTABLES Rule to begin processing packets############
 QUEUE_NUM = 1
@@ -38,39 +45,57 @@ os.system("iptables -I INPUT -p tcp --sport 179 -j NFQUEUE --queue-num {}".forma
 os.system("iptables -I OUTPUT -p tcp --dport 179 -j NFQUEUE --queue-num {}".format(QUEUE_NUM))
 os.system("iptables -I OUTPUT -p tcp --sport 179 -j NFQUEUE --queue-num {}".format(QUEUE_NUM))
 
-client = pymongo.MongoClient('10.3.0.3', 27017)
-db = client["bgp_db"]
-collection = db["known_bgp"]
 
+#set time and counter global variables for performance metrics/reporting
 def get_datetime():
     return datetime.datetime.now()
 
 old_print = print
 
-#Set the default mongoclient to ix3
-#client = MongoClient('10.3.0.3', 27017
+#Performance Counters
+db_counter=0
+packet_time_sum=0
+db_time_sum=0
+packet_counter=0
+db_lookup_sum=0
+db_lookup_counter=0
 
+
+#Packet processing function to query db info. Looks for BGPUpdate messages containing NLRI advertisements.
 def pkt_in(packet):
+
+
+    #Start counter metrics
+    global  packet_counter, packet_time_sum, chain_counter, chain_time_sum
+    packet_counter+=1
+    
+    
+    #Terminal Output Stats
     local_index = global_index.incr_index()
     def ts_print(*args, **kwargs):
         old_print(str(datetime.datetime.now()) + "--" + str(local_index), *args, **kwargs)
-
     print = ts_print
-    #The following 3 lines are for testing db connections. TODO: delete this lol
-    # print(str(client.list_database_names()))
+    
+    
+    #Start counters for proxy handling time
+    start_time1 = time.time_ns() // 1_000_000
+    print ("proxy start time:"+str(start_time1))
 
-    print("rx packet")
+
+    #Get packet payload, convert to mutable packet so we can modify it if needed.
+    #print("rx packet")
     pkt = IP(packet.get_payload())
     m_pkt = MutablePacket(pkt)
-    # TODO: wrap this pkt with an m_pkt class. can track packet modifications
-    print(packet)
+    #print(packet)
     print(m_pkt.show())
 
+
+    #check if active BGP connection exists. If we modify packets, will need to handle TCP counters through this.
     if not connections.connection_exists(m_pkt):
         connections.add_connection(m_pkt)
-    # connections.update_connection(m_pkt)
-
-    if m_pkt.is_bgp_update(): # checks for both bgp packet and bgp update
+    
+    # checks for both bgp packet and bgp update
+    if m_pkt.is_bgp_update(): 
         print("rx BGP Update pkt")
         try:
             # iterate over packet bgp payloads (bgp layers)
@@ -94,12 +119,10 @@ def pkt_in(packet):
                             print ("Advertised Segment: " + str(segment))
                             print ("validating advertisement for ASN: " + str(update.get_origin_asn()))
                             
-                            validationResult = db_validate(segment)
-                            # print(type(validationResult))
-                            # print(str(validationResult))
+                            #Conduct call to DB to validate prefix/ASN ownership
+                            validationResult, duration2 = db_validate(segment)
 
-                            #validationResult = bgpchain_validate(segment, tx_sender) #checks the blockchain. Change to mongo check
-                            #segment = prefix, sender = advertising asn. Returns prefix valid stuff
+
                             if validationResult == validatePrefixResult.prefixValid:
                                 print("NLRI " + str(count) + " passed authorization...checking next ASN")
                             elif validationResult == validatePrefixResult.prefixNotRegistered:
@@ -109,6 +132,11 @@ def pkt_in(packet):
                                 handle_invalid_advertisement(m_pkt, nlri, validationResult, update)
                             else:
                                 print("error. should never get here. received back unknown validationResult: " + str(validationResult))
+                            
+                            #Performance metric for verifying total packet
+                            chain_time_sum+=duration2
+                            print ("Whole NLRI Validation was: "+str(NLRI_time_sum)+" ms.")
+                            
                         if m_pkt.is_bgp_modified():
                             print("BGP Update packet has been modified")
                         else:
@@ -132,6 +160,12 @@ def pkt_in(packet):
                     packet.set_payload(m_pkt.bytes())
                 else:
                     print("packet not modified. accepting as is")
+                    
+            #Performance metrics for full proxy/db action
+            duration1=(time.time_ns() // 1_000_000) - start_time1
+            chain_time_sum+=duration1
+            chain_counter+=1
+            print ("Full proxy/chain  duration was: "+str(duration1)+" ms.")        
             packet.accept()
 
         except IndexError as ie:
@@ -149,6 +183,11 @@ def pkt_in(packet):
             print("yes headers modified. set packet bytes.")
             packet.set_payload(m_pkt.bytes())
         print("accept non bgp packet")
+        
+        #Full proxy processing time (for non-lookup packets)
+        duration1=(time.time_ns() // 1_000_000) - start_time1
+        packet_time_sum+=duration1
+        print ("proxy only duration was: "+str(duration1)+" ms.")
         packet.accept()
 
 def handle_unregistered_advertisement(m_pkt, nlri, validationResult, update):
@@ -170,25 +209,30 @@ def remove_invalid_nlri_from_packet(m_pkt, nlri, update):
         print("bgp packet modified")
     else:
         print("ERROR: packet modification failed")
-
+        
 def db_validate(segment):
 
+    #set global counters for performanc metrics
+    global  chain_lookup_sum, chain_lookup_counter
+    start_time = time.time_ns() // 1_000_000
+    print("Database start time:"+str(start_time))
+    
     inIP = IPv4Address(segment[1])
     inSubnet = int(segment[2])
     inASN = int(segment[0])
     print ("Validating segment: AS" + str(inASN)+ " , " + str(inIP) + "/" + str(inSubnet))
     
-    # tx_sender.generate_transaction_object("IANA", "IANA_CONTRACT_ADDRESS")
-    # print("Transaction setup complete for: " + tx_sender_name)
+    #DB lookup/validation
     ret=collection.find_one({'labels.net1_address': str(inIP) + "/" + str(inSubnet)},{'labels.asn':1})
     #ret = collection.find({'labels.net_0_address': str(inIP) + "/" + str(inSubnet
     print('retrieved db info') 
-    print(ret)
+    #print(ret)
     validASN = ""
+    validationResult=""
   
     try:
        validASN=ret['labels']['asn']
-       print(str(validASN)+'this is output of try')
+       #print(str(validASN)+'this is output of try')
        print(str(inASN)+' vs. '+ str(validASN))
     except:
        print('No Match Found - Except')
@@ -198,13 +242,21 @@ def db_validate(segment):
     
     if validASN == "":
         print ("Prefix not registered")
-        return (validatePrefixResult.prefixNotRegistered)
-    elif str(validASN) == str(inASN): #better approach
+        validationResult=validatePrefixResult.prefixNotRegistered
+    elif str(validASN) == str(inASN): 
         print ("Prefix is valid")
-        return (validatePrefixResult.prefixValid)
+        validationResult=validatePrefixResult.prefixValid
     else:
         print ("Owners don't match")
-        return (validatePrefixResult.prefixOwnersDoNotMatch)
+        validationResult=validatePrefixResult.prefixOwnersDoNotMatch
+
+    #final db performance metrics
+    duration=(time.time_ns() // 1_000_000) - start_time
+    chain_lookup_sum+=duration
+    chain_lookup_counter+=1
+    
+    print ("chain Lookup Duration was: "+str(duration)+" ms.")
+    return validationResult, duration
 
 
 if __name__=='__main__':
@@ -217,7 +269,9 @@ if __name__=='__main__':
     nfqueue = NetfilterQueue()
  
     try:
+        complete_time = time.time_ns() // 1_000_000
         nfqueue.bind(QUEUE_NUM, pkt_in)
+        complete_duration=(time.time_ns() // 1_000_000) - complete_time 
         #nfqueue.bind(2, pkt_in)
         nfqueue.run()
     except KeyboardInterrupt:
@@ -225,3 +279,19 @@ if __name__=='__main__':
         # remove that rule we just inserted, going back to normal.
         os.system("iptables --flush")
         nfqueue.unbind()
+        
+        #print out final performance statistics over full run
+        print ("Total packets:"+str(packet_counter))
+        time_avg=packet_time_sum/packet_counter
+        print ("Proxy average time:"+str(time_avg))
+        try:
+            print ("Total DB packets:"+str(chain_counter))
+            chain_avg=chain_lookup_sum/chain_lookup_counter
+            print("Average DB lookup time:"+str(chain_avg))
+        except:
+            print("No chain packets")
+        try:
+            full_lookup=chain_time_sum/chain_counter
+            print ("Full  DB packet time with lookup:"+str(full_lookup)+"ms")
+        except:
+            print("no DB packets")
