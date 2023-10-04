@@ -143,7 +143,7 @@ def pkt_in(packet):
                                 print("error. should never get here. received back unknown validationResult: " + str(validationResult))
                             
                             #Performance metric for verifying total packet
-                            
+                        db_packets += 1
                         #print ("Whole NLRI Validation was: "+str(NLRI_time_sum)+" ms.")
                             
                         if m_pkt.is_bgp_modified():
@@ -175,7 +175,6 @@ def pkt_in(packet):
             duration1=(time.time_ns() // 1_000_000) - start_time1
             proxy_time1+=duration1
             proxy_packets1+=1
-            db_packets+=1
             print ("Full proxy/db  duration was: "+str(duration1)+" ms.")   
             print ("AVG db lookup duration was:" +str(db_time/db_lookups)+" ms. for "+str(db_lookups)+" lookups")
             print("Total db time was: "+str(db_time/db_packets))
