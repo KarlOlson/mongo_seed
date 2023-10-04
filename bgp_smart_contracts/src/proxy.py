@@ -176,7 +176,8 @@ def pkt_in(packet):
             proxy_packets1+=1
             db_packets+=1
             print ("Full proxy/db  duration was: "+str(duration1)+" ms.")   
-            print ("AVG db lookup duration was:" +str(db_time/db_lookups)+" ms.")
+            print ("AVG db lookup duration was:" +str(db_time/db_lookups)+" ms. for "+str(db_lookups)+" lookups")
+            print("Total db time was: "+str(db_time/db_packets))
             packet.accept()
 
         except IndexError as ie:
@@ -296,7 +297,7 @@ if __name__=='__main__':
         #print out final performance statistics over full run
         print ("Total Update packets:"+str(proxy_packets1))
         time_avg=proxy_time1/proxy_packets1
-        print ("Proxy average time for Update Packets:"+str(time_avg))
+        print ("Proxy +DB average time for Update Packets:"+str(time_avg))
         print ("Average Proxy Time (Non-Update Packets): "+str(proxy_time2/proxy_packets2))
         try:
             print ("Total DB packets:"+str(db_packets))
