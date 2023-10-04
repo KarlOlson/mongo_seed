@@ -66,7 +66,7 @@ def pkt_in(packet):
 
 
     #Start counter metrics
-    global  packet_counter, packet_time_sum, chain_counter, chain_time_sum
+    global  packet_counter, packet_time_sum, db_counter, db_time_sum
     packet_counter+=1
     
     
@@ -134,7 +134,7 @@ def pkt_in(packet):
                                 print("error. should never get here. received back unknown validationResult: " + str(validationResult))
                             
                             #Performance metric for verifying total packet
-                            chain_time_sum+=duration2
+                            db_time_sum+=duration2
                             print ("Whole NLRI Validation was: "+str(NLRI_time_sum)+" ms.")
                             
                         if m_pkt.is_bgp_modified():
@@ -163,9 +163,9 @@ def pkt_in(packet):
                     
             #Performance metrics for full proxy/db action
             duration1=(time.time_ns() // 1_000_000) - start_time1
-            chain_time_sum+=duration1
-            chain_counter+=1
-            print ("Full proxy/chain  duration was: "+str(duration1)+" ms.")        
+            db_time_sum+=duration1
+            db_counter+=1
+            print ("Full proxy/db  duration was: "+str(duration1)+" ms.")        
             packet.accept()
 
         except IndexError as ie:
@@ -213,7 +213,7 @@ def remove_invalid_nlri_from_packet(m_pkt, nlri, update):
 def db_validate(segment):
 
     #set global counters for performanc metrics
-    global  chain_lookup_sum, chain_lookup_counter
+    global  db_lookup_sum, db_lookup_counter
     start_time = time.time_ns() // 1_000_000
     print("Database start time:"+str(start_time))
     
@@ -252,10 +252,10 @@ def db_validate(segment):
 
     #final db performance metrics
     duration=(time.time_ns() // 1_000_000) - start_time
-    chain_lookup_sum+=duration
-    chain_lookup_counter+=1
+    db_lookup_sum+=duration
+    db_lookup_counter+=1
     
-    print ("chain Lookup Duration was: "+str(duration)+" ms.")
+    print ("db Lookup Duration was: "+str(duration)+" ms.")
     return validationResult, duration
 
 
@@ -285,13 +285,13 @@ if __name__=='__main__':
         time_avg=packet_time_sum/packet_counter
         print ("Proxy average time:"+str(time_avg))
         try:
-            print ("Total DB packets:"+str(chain_counter))
-            chain_avg=chain_lookup_sum/chain_lookup_counter
-            print("Average DB lookup time:"+str(chain_avg))
+            print ("Total DB packets:"+str(db_counter))
+            db_avg=db_lookup_sum/db_lookup_counter
+            print("Average DB lookup time:"+str(db_avg))
         except:
-            print("No chain packets")
+            print("No db packets")
         try:
-            full_lookup=chain_time_sum/chain_counter
+            full_lookup=db_time_sum/db_counter
             print ("Full  DB packet time with lookup:"+str(full_lookup)+"ms")
         except:
             print("no DB packets")
