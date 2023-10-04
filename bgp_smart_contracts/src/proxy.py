@@ -77,13 +77,14 @@ def pkt_in(packet):
         
     #Start counters for proxy handling time
     start_time1 = time.time_ns() // 1_000_000
-    print ("proxy start time:"+str(start_time1))
+    
     
     #Terminal Output Stats
     local_index = global_index.incr_index()
     def ts_print(*args, **kwargs):
         old_print(str(datetime.datetime.now()) + "--" + str(local_index), *args, **kwargs)
     print = ts_print
+    print ("proxy start time:"+str(start_time1))
     
     
     
