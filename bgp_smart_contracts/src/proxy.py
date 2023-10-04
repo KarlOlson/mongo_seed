@@ -172,11 +172,11 @@ def pkt_in(packet):
                     
             #Performance metrics for full proxy/db action
             duration1=(time.time_ns() // 1_000_000) - start_time1
-            packet_time+=duration1
-            proxy_packets+=1
+            proxy_time1+=duration1
+            proxy_packets1+=1
             db_packets+=1
             print ("Full proxy/db  duration was: "+str(duration1)+" ms.")   
-            print ("AVG db lookup duration was:" +str(db_time_sum/db_counter)+" ms."
+            print ("AVG db lookup duration was:" +str(db_time_sum/db_counter)+" ms.")
             packet.accept()
 
         except IndexError as ie:
