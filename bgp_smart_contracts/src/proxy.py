@@ -143,7 +143,7 @@ def pkt_in(packet):
                             
                             #Performance metric for verifying total packet
                             
-                            print ("Whole NLRI Validation was: "+str(NLRI_time_sum)+" ms.")
+                        #print ("Whole NLRI Validation was: "+str(NLRI_time_sum)+" ms.")
                             
                         if m_pkt.is_bgp_modified():
                             print("BGP Update packet has been modified")
@@ -176,7 +176,7 @@ def pkt_in(packet):
             proxy_packets1+=1
             db_packets+=1
             print ("Full proxy/db  duration was: "+str(duration1)+" ms.")   
-            print ("AVG db lookup duration was:" +str(db_time_sum/db_counter)+" ms.")
+            print ("AVG db lookup duration was:" +str(db_time/db_counter)+" ms.")
             packet.accept()
 
         except IndexError as ie:
