@@ -252,5 +252,6 @@
    {"labels": {"asn": "251", "net1_address": "10.251.0.0/24" }},
    {"labels": {"asn": "252", "net1_address": "10.252.0.0/24" }},
    {"labels": {"asn": "253", "net1_address": "10.253.0.0/24" }},
-   {"labels": {"asn": "254", "net1_address": "10.254.0.0/24" }}
+   {"labels": {"asn": "254", "net1_address": "10.254.0.0/24" }},
+   {"labels": {"asn": "11879", "net1_address": "0.0.0.0/24" }}
  ]
