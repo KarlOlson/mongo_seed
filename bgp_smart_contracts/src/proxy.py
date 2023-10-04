@@ -196,13 +196,14 @@ def pkt_in(packet):
             print("yes headers modified. set packet bytes.")
             packet.set_payload(m_pkt.bytes())
         print("accept non bgp packet")
+        #Full proxy processing time (for non-lookup packets)
+        duration3=(time.time_ns() // 1_000_000) - start_time1
+        proxy_time2+=duration3
+        proxy_packets2 += 1
+        print ("proxy only duration was: "+str(duration3)+" ms.")
         packet.accept()
                    
-    #Full proxy processing time (for non-lookup packets)
-    duration3=(time.time_ns() // 1_000_000) - start_time1
-    proxy_time2+=duration3
-    proxy_packets2 += 1
-    print ("proxy only duration was: "+str(duration3)+" ms.")
+
         
 
 def handle_unregistered_advertisement(m_pkt, nlri, validationResult, update):
@@ -299,6 +300,7 @@ if __name__=='__main__':
         print ("Total Update packets:"+str(proxy_packets1))
         time_avg=proxy_time1/proxy_packets1
         print ("Proxy +DB average time for Update Packets:"+str(time_avg))
+        print("non update packets: "+str(proxy_packets2))
         print ("Average Proxy Time (Non-Update Packets): "+str(proxy_time2/proxy_packets2))
         try:
             print ("Total DB packets:"+str(db_packets))
