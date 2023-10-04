@@ -7,7 +7,7 @@ from operator import add
 from netfilterqueue import NetfilterQueue
 from scapy.all import *
 # from Classes.Account import Account
-from Utils.Utils import *
+# from Utils.Utils import *
 from Classes.PacketProcessing.MutablePacket import MutablePacket
 from Classes.PacketProcessing.BGPUpdate import BGPUpdate
 from Classes.PacketProcessing.Index import Index
@@ -16,7 +16,7 @@ from Classes.PacketProcessing.FiveTuple import FiveTuple
 from Classes.PacketProcessing.FlowDirection import FlowDirection
 from Classes.PacketProcessing.DatabaseValidation import db_validate
 from ipaddress import IPv4Address
-from Classes.Account import Account
+#from Classes.Account import Account
 import os, sys
 import datetime
 import subprocess
