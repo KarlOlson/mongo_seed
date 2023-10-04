@@ -226,7 +226,7 @@ def remove_invalid_nlri_from_packet(m_pkt, nlri, update):
 def db_validate(segment):
 
     #set global counters for performanc metrics
-    global  db_lookup_counter
+    global  db_lookups
     start_time = time.time_ns() // 1_000_000
     print("Database start time:"+str(start_time))
     
