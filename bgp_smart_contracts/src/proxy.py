@@ -176,7 +176,7 @@ def pkt_in(packet):
             proxy_packets1+=1
             db_packets+=1
             print ("Full proxy/db  duration was: "+str(duration1)+" ms.")   
-            print ("AVG db lookup duration was:" +str(db_time/db_counter)+" ms.")
+            print ("AVG db lookup duration was:" +str(db_time/db_lookups)+" ms.")
             packet.accept()
 
         except IndexError as ie:
