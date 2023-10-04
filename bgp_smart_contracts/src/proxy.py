@@ -53,12 +53,19 @@ def get_datetime():
 old_print = print
 
 #Performance Counters
-db_counter=0
-packet_time_sum=0
-db_time_sum=0
-packet_counter=0
-db_lookup_sum=0
-db_lookup_counter=0
+db_time=0
+db_packets=0
+db_lookups=0
+
+proxy_time1=0
+proxy_packets1=0
+
+proxy_time2=0
+proxy_packets2=0
+
+total_time=0
+total_packets=0
+
 
 
 #Packet processing function to query db info. Looks for BGPUpdate messages containing NLRI advertisements.
@@ -66,9 +73,11 @@ def pkt_in(packet):
 
 
     #Start counter metrics
-    global  packet_counter, packet_time_sum, db_counter, db_time_sum
-    packet_counter+=1
-    
+    global  db_time, db_packets, proxy_time1, proxy_packets1, proxy_time2, proxy_packets2, db_lookups
+        
+    #Start counters for proxy handling time
+    start_time1 = time.time_ns() // 1_000_000
+    print ("proxy start time:"+str(start_time1))
     
     #Terminal Output Stats
     local_index = global_index.incr_index()
@@ -77,9 +86,8 @@ def pkt_in(packet):
     print = ts_print
     
     
-    #Start counters for proxy handling time
-    start_time1 = time.time_ns() // 1_000_000
-    print ("proxy start time:"+str(start_time1))
+    
+    
 
 
     #Get packet payload, convert to mutable packet so we can modify it if needed.
@@ -121,7 +129,7 @@ def pkt_in(packet):
                             
                             #Conduct call to DB to validate prefix/ASN ownership
                             validationResult, duration2 = db_validate(segment)
-
+                            db_time+=duration2
 
                             if validationResult == validatePrefixResult.prefixValid:
                                 print("NLRI " + str(count) + " passed authorization...checking next ASN")
@@ -134,13 +142,14 @@ def pkt_in(packet):
                                 print("error. should never get here. received back unknown validationResult: " + str(validationResult))
                             
                             #Performance metric for verifying total packet
-                            db_time_sum+=duration2
+                            
                             print ("Whole NLRI Validation was: "+str(NLRI_time_sum)+" ms.")
                             
                         if m_pkt.is_bgp_modified():
                             print("BGP Update packet has been modified")
                         else:
                             print("BGP update and headers are not modified")
+                            
                     else:
                         print("BGP Update packet has no NLRI advertisements")
                 else:
@@ -163,9 +172,11 @@ def pkt_in(packet):
                     
             #Performance metrics for full proxy/db action
             duration1=(time.time_ns() // 1_000_000) - start_time1
-            db_time_sum+=duration1
-            db_counter+=1
-            print ("Full proxy/db  duration was: "+str(duration1)+" ms.")        
+            packet_time+=duration1
+            proxy_packets+=1
+            db_packets+=1
+            print ("Full proxy/db  duration was: "+str(duration1)+" ms.")   
+            print ("AVG db lookup duration was:" +str(db_time_sum/db_counter)+" ms."
             packet.accept()
 
         except IndexError as ie:
@@ -183,12 +194,14 @@ def pkt_in(packet):
             print("yes headers modified. set packet bytes.")
             packet.set_payload(m_pkt.bytes())
         print("accept non bgp packet")
-        
-        #Full proxy processing time (for non-lookup packets)
-        duration1=(time.time_ns() // 1_000_000) - start_time1
-        packet_time_sum+=duration1
-        print ("proxy only duration was: "+str(duration1)+" ms.")
         packet.accept()
+                   
+    #Full proxy processing time (for non-lookup packets)
+    duration3=(time.time_ns() // 1_000_000) - start_time1
+    proxy_time2+=duration3
+    proxy_packets2 += 1
+    print ("proxy only duration was: "+str(duration3)+" ms.")
+        
 
 def handle_unregistered_advertisement(m_pkt, nlri, validationResult, update):
     print ("AS " + str(update.get_origin_asn()) + " Failed Authorization. [" + str(validationResult) + "]. BGPUpdate layer: " + str(update.get_layer_index()))
@@ -213,7 +226,7 @@ def remove_invalid_nlri_from_packet(m_pkt, nlri, update):
 def db_validate(segment):
 
     #set global counters for performanc metrics
-    global  db_lookup_sum, db_lookup_counter
+    global  db_lookup_counter
     start_time = time.time_ns() // 1_000_000
     print("Database start time:"+str(start_time))
     
@@ -252,8 +265,8 @@ def db_validate(segment):
 
     #final db performance metrics
     duration=(time.time_ns() // 1_000_000) - start_time
-    db_lookup_sum+=duration
-    db_lookup_counter+=1
+    #db_lookup_sum+=duration
+    db_lookups+=1
     
     print ("db Lookup Duration was: "+str(duration)+" ms.")
     return validationResult, duration
@@ -281,17 +294,21 @@ if __name__=='__main__':
         nfqueue.unbind()
         
         #print out final performance statistics over full run
-        print ("Total packets:"+str(packet_counter))
-        time_avg=packet_time_sum/packet_counter
-        print ("Proxy average time:"+str(time_avg))
+        print ("Total Update packets:"+str(proxy_packets1))
+        time_avg=proxy_time1/proxy_packets1
+        print ("Proxy average time for Update Packets:"+str(time_avg))
+        print ("Average Proxy Time (Non-Update Packets): "+str(proxy_time2/proxy_packets2))
         try:
-            print ("Total DB packets:"+str(db_counter))
-            db_avg=db_lookup_sum/db_lookup_counter
-            print("Average DB lookup time:"+str(db_avg))
+            print ("Total DB packets:"+str(db_packets))
+            db_avg=db_time/db_packets
+            print("Average DB lookup time (whole NLRI):"+str(db_avg))
+            print("Average NLRI lookup time: "+str(db_time/db_lookups))
+            print("Average Proxy Overhead time: "+str((proxy_time1-db_time)/proxy_packets1))
+            
         except:
             print("No db packets")
-        try:
-            full_lookup=db_time_sum/db_counter
-            print ("Full  DB packet time with lookup:"+str(full_lookup)+"ms")
-        except:
-            print("no DB packets")
+        #try:
+            #full_lookup=db_time_sum/db_counter
+            #print ("Full  DB packet time with lookup:"+str(full_lookup)+"ms")
+        #except:
+            #print("no DB packets")
