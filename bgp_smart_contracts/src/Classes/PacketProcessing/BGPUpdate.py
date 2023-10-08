@@ -7,12 +7,16 @@ class BGPUpdate:
         self.layer_index = layer_index
         self.origin_asn = -1
         self.next_hop_asn = None
+        self.asn_segment = []
 
     def get_layer_index(self):
         return self.layer_index
 
     def get_origin_asn(self):
         return self.origin_asn
+        #KO
+    def asn_segment(self):
+        return self.asn_segment
     
     def has_nlri_advertisements(self):
         if self.bgp_update.path_attr_len > 0:
@@ -35,13 +39,22 @@ class BGPUpdate:
             # self.origin_asn = self.bgp_update.path_attr[1].attribute.segments[0].segment_length
         return self.origin_asn
 
+        #KO  
+    def get_asn_path(self):
+        if len(self.bgp_update.path_attr[1].attribute.segments[-1].segment_value) >= 1:
+            self.asn_segment = self.bgp_update.path_attr[1].attribute.segments[-1].segment_value
+        else:
+            print("ERROR: no origin ASN!1 ahhh")
+        return self.asn_segment
+
     def nlri(self):
         return self.bgp_update.nlri
    
     def get_segment(self, nlri):
         if self.origin_asn == -1:
             self.get_origin_asn_from_payload()
-        return [self.origin_asn, str(nlri.prefix).split('/')[0], str(nlri.prefix).split('/')[1]]
+            self.get_asn_path()
+        return [self.origin_asn, str(nlri.prefix).split('/')[0], str(nlri.prefix).split('/')[1], self.asn_segment]
 
     # def get_next_hop_asn(self):
     #     print("getting next hop ASN")
