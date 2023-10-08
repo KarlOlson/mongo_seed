@@ -127,7 +127,7 @@ def pkt_in(packet):
                             print("BGP NLRI check: " + str(nlri.prefix))
                             print ("Advertised Segment: " + str(segment))
                             print ("validating advertisement for ASN: " + str(update.get_origin_asn()))
-                            
+                            print ("ASN_Path is: ", update.asn_segment)
                             #Conduct call to DB to validate prefix/ASN ownership
                             validationResult, duration2 = db_validate(segment)
                             db_time+=duration2
