@@ -232,8 +232,8 @@ def remove_invalid_nlri_from_packet(m_pkt, nlri, update):
 def path_validate(segment_path):
 
     #set global counters for performanc metrics
-    $global  path_validate_sum, path_lookup_counter
-    $start_time = time.time_ns() // 1_000_000
+    #global  path_validate_sum, path_lookup_counter
+    #start_time = time.time_ns() // 1_000_000
     #print("Path start time:"+str(start_time))
     
     print ("Validating segment: ", segment)
