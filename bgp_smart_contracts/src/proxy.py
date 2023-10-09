@@ -241,10 +241,10 @@ def path_validate(segment_path):
     for indx, asn in enumerate(segment_path):
        if indx == segment_path.length():
           break
-       elif collection.find_one({'labels.asn': str(asn), {'labels.neighbors':{$in: [segment_path[indx+1]]},}).count() == 1:
-          validation[asn]= True
+       elif collection.count_documents({'labels.asn': str(asn), 'labels.neighbors': {'$in': [segment_path[indx+1]]}}) == 1:
+          validation[str(asn)] = True
        else:
-          validation[asn]=False
+          validation[str(asn)] = False
           
     print(validation)
     if all(value == True for value in validaiton.values()):
