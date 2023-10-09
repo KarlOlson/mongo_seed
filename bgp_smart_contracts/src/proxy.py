@@ -134,7 +134,7 @@ def pkt_in(packet):
                             #validationResult, duration2 = db_validate(segment)
                             #db_time+=duration2
 
-                            validation_dict=path_validate(update.asn_segment)
+                            validation_dict=path_validate(update.asn_segment, local_asn)
                             print("validation result is: ", validation_dict)
 
                             #if validationResult == validatePrefixResult.prefixValid:
