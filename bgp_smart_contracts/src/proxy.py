@@ -17,6 +17,7 @@ from Classes.PacketProcessing.FlowDirection import FlowDirection
 from Classes.PacketProcessing.DatabaseValidation import db_validate
 from ipaddress import IPv4Address
 from Classes.Account import Account
+from operator import countOf
 import os, sys
 import datetime
 import subprocess
@@ -245,7 +246,7 @@ def path_validate(segment_path, local_asn):
               print("Path is fully verified",validation)
               return validation
           else:
-              print("The percentage of path validated is: ",{key: percentage(True, values) for key, values in validation.items()})
+              print("The percentage of path validated is: ", countOf(validation.values(), True)/len(validation))
               return validation
               
        elif collection.count_documents({'labels.asn': str(asn), 'labels.neighbors': {'$in': [segment_path[indx+1]]}}) == 1:
