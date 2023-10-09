@@ -22,6 +22,7 @@ import datetime
 import subprocess
 import pymongo
 
+local_asn=int(sys.argv[1])
 
 ACCEPT_UNREGISTERED_ADVERTISEMENTS = True # set to False to remove all advertisements that are not registered
 
@@ -229,30 +230,29 @@ def remove_invalid_nlri_from_packet(m_pkt, nlri, update):
         print("ERROR: packet modification failed")
 
 
-def path_validate(segment_path):
+def path_validate(segment_path, local_asn):
 
     #set global counters for performanc metrics
     #global  path_validate_sum, path_lookup_counter
     #start_time = time.time_ns() // 1_000_000
     #print("Path start time:"+str(start_time))
-    
-    print ("Validating segment: ", segment)
+    segment_path.insert(0,local_asn)
+    print ("Validating segment: ", segment_path)
     validation={}
     for indx, asn in enumerate(segment_path):
-       if indx == segment_path.length():
-          break
+       if indx == len(segment_path)-1:
+          if all(value == True for value in validation.values()):
+              print("Path is fully verified",validation)
+              return validation
+          else:
+              print("The percentage of path validated is: ",{key: percentage(True, values) for key, values in validation.items()})
+              return validation
+              
        elif collection.count_documents({'labels.asn': str(asn), 'labels.neighbors': {'$in': [segment_path[indx+1]]}}) == 1:
-          validation[str(asn)] = True
+          validation[asn] = True
+           
        else:
-          validation[str(asn)] = False
-          
-    print(validation)
-    if all(value == True for value in validaiton.values()):
-    	print("path is fully verified")
-    else:
-       print("the percentage of path is: ", {key: percentage(True, values) for key, values in validation.items()})
-    
-    return validation       
+          validation[asn] = False      
 
 
 def db_validate(segment):
