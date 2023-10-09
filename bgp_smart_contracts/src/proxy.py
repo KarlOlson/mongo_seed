@@ -129,18 +129,21 @@ def pkt_in(packet):
                             print ("validating advertisement for ASN: " + str(update.get_origin_asn()))
                             print ("ASN_Path is: ", update.asn_segment)
                             #Conduct call to DB to validate prefix/ASN ownership
-                            validationResult, duration2 = db_validate(segment)
-                            db_time+=duration2
+                            #validationResult, duration2 = db_validate(segment)
+                            #db_time+=duration2
 
-                            if validationResult == validatePrefixResult.prefixValid:
-                                print("NLRI " + str(count) + " passed authorization...checking next ASN")
-                            elif validationResult == validatePrefixResult.prefixNotRegistered:
-                                print("Unregistered BGP")
-                                handle_unregistered_advertisement(m_pkt, nlri, validationResult, update)
-                            elif validationResult == validatePrefixResult.prefixOwnersDoNotMatch:
-                                handle_invalid_advertisement(m_pkt, nlri, validationResult, update)
-                            else:
-                                print("error. should never get here. received back unknown validationResult: " + str(validationResult))
+                            validation_dict=path_validate(update.asn_segment)
+                            print("validation result is: ", validation_dict)
+
+                            #if validationResult == validatePrefixResult.prefixValid:
+                            #print("NLRI " + str(count) + " passed authorization...checking next ASN")
+                            #elif validationResult == validatePrefixResult.prefixNotRegistered:
+                                #print("Unregistered BGP")
+                                #handle_unregistered_advertisement(m_pkt, nlri, validationResult, update)
+                            #elif validationResult == validatePrefixResult.prefixOwnersDoNotMatch:
+                                #handle_invalid_advertisement(m_pkt, nlri, validationResult, update)
+                            #else:
+                                #print("error. should never get here. received back unknown validationResult: " + str(validationResult))
                             
                             #Performance metric for verifying total packet
                         db_packets += 1
@@ -224,7 +227,34 @@ def remove_invalid_nlri_from_packet(m_pkt, nlri, update):
         print("bgp packet modified")
     else:
         print("ERROR: packet modification failed")
-        
+
+
+def path_validate(segment_path):
+
+    #set global counters for performanc metrics
+    $global  path_validate_sum, path_lookup_counter
+    $start_time = time.time_ns() // 1_000_000
+    #print("Path start time:"+str(start_time))
+    
+    print ("Validating segment: ", segment)
+    validation={}
+    for indx, asn in enumerate(segment_path):
+       if indx == segment_path.length():
+          break
+       elif collection.find_one({'labels.asn': str(asn), {'labels.neighbors':{$in: [segment_path[indx+1]]},}).count() == 1:
+          validation[asn]= True
+       else:
+          validation[asn]=False
+          
+    print(validation)
+    if all(value == True for value in validaiton.values()):
+    	print("path is fully verified")
+    else:
+       print("the percentage of path is: ", {key: percentage(True, values) for key, values in validation.items()})
+    
+    return validation       
+
+
 def db_validate(segment):
 
     #set global counters for performanc metrics
