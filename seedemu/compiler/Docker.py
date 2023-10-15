@@ -11,7 +11,7 @@ from shutil import copyfile
 import re
 # from Autoscale_100 import testingPython
 
-SEEDEMU_CLIENT_IMAGE='karlolson1/mongo:v4'
+SEEDEMU_CLIENT_IMAGE='karlolson1/mongo:v9'
 
 DockerCompilerFileTemplates: Dict[str, str] = {}
 
@@ -24,7 +24,7 @@ DockerCompilerFileTemplates['db_host_automater'] = """\
 #! /bin/bash
 mkdir -p data/db
 
-mongod --quiet --bind_ip 10.3.0.3
+mongod --quiet --bind_ip 10.3.0.3 &
 """
 
 # DockerCompilerFileTemplates['db_import_automater'] = """\
@@ -35,7 +35,7 @@ mongod --quiet --bind_ip 10.3.0.3
 
 DockerCompilerFileTemplates['dbImport'] = """\
 #! /bin/bash
-cd jenkinsseedproxy/Autoscale_100/
+cd mongo_seed
 sleep 3
 mongoimport --host=10.3.0.3 --db='bgp_db' --collection='known_bgp' --file='routingdb.json'
 sleep 5
@@ -1117,7 +1117,7 @@ class Docker(Compiler):
                 special_commands += '/db_host_automater.sh\n'
 
 
-        if node.getName() == "rw":
+        if ("router0" in node.getName()) and (str(node.getAsn()) == '191'):
                 dockerfile += self._addFile('/dbImport.sh', DockerCompilerFileTemplates['dbImport'])
                 start_commands += 'chmod +x /dbImport.sh\n'
                 special_commands += './dbImport.sh\n'
