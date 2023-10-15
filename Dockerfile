@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 RUN echo 'exec zsh' > /root/.bashrc 
-RUN apt-get update && apt-get install -y --no-install-recommends gnupg curl apt-utils dnsutils ipcalc iproute2 iputils-ping jq mtr-tiny nano netcat tcpdump termshark vim-nox zsh && apt-get install -y build-essential python3 python3-pip python3-dev nodejs git && apt-get install -y npm traceroute libnfnetlink-dev libnetfilter-queue-dev && apt-get install iptables sudo -y 
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg curl apt-utils dnsutils ipcalc iproute2 iputils-ping jq mtr-tiny nano netcat tcpdump termshark vim-nox zsh && apt-get install -y build-essential python3 python3-pip python3-dev nodejs git && apt-get install -y npm traceroute libnfnetlink-dev libnetfilter-queue-dev bgpdump && apt-get install iptables sudo -y 
 RUN pip3 install --upgrade pip && pip3 install py-solc-x web3 python-dotenv scapy==2.4.5 Pybird
 RUN curl -L https://grml.org/zsh/zshrc > /root/.zshrc && mkdir -p /usr/share/doc/bird2/examples/ && touch /usr/share/doc/bird2/examples/bird.conf && apt-get update && apt-get install --no-install-recommends bird2 && rm -rf /var/lib/apt/lists/*
 # Use 4 byte ASNs
