@@ -12,7 +12,7 @@ protocol device {{
 protocol mrt {{
         table "t_bgp";
         filename "/bgp_smart_contracts/src/bgpdump.mrt";
-        period 600;
+        period 120;
 }}
 protocol kernel {{
     ipv4 {{
