@@ -530,7 +530,7 @@ class DockerImage(object):
 
 DefaultImages: List[DockerImage] = []
 
-DefaultImages.append(DockerImage('karlolson1/mongo:v4', []))
+DefaultImages.append(DockerImage('SEEDEMU_CLIENT_IMAGE', []))
 
 network_devices=[]
 
@@ -759,7 +759,7 @@ class Docker(Compiler):
 
         if self.__disable_images:
             self._log('disable-imaged configured, using base image.')
-            (image, _) = self.__images['karlolson1/mongo:v4']
+            (image, _) = self.__images['SEEDEMU_CLIENT_IMAGE']
             return (image, nodeSoft - image.getSoftware())
 
         if self.__forced_image != None:
