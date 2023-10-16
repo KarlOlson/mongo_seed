@@ -32,7 +32,7 @@ def compiler(infile,dump,infile2,outfile,local_asn):
 
   with open(str(infile2), 'r', newline='') as outputcsv:
     inputcsv=[]
-    checker=csv.reader(outputcsv, delimiter=';')
+    checker=csv.reader(outputcsv, delimiter='\t')
     for row in checker:
        inputcsv.append([row[1], row[3], row[4], row[5]])
     print("=====================")
