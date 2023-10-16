@@ -7,6 +7,7 @@ import csv
 #after output, go into file and do find/replace for " with a space
 #then do find and replace for }} with }},
 #add array bracket at beginning of file [ and end of file ], save
+#also need to replace all single quotes with double. python makes single.
 ###################################################################
 
 #Process command line arguments
