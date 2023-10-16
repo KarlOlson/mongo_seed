@@ -44,9 +44,13 @@ def compiler(infile,dump,infile2,outfile,local_asn):
       #print(i[0])
       #print(j[0])
       print('================')
+      
       if i[0]==j[0]:
+        seg1=j[2].split(' ')
+        seg2=list(map(int, seg1))
+        print ("seg2 is: ",seg2)
         print(i[0],j[0])
-        path2,path3, path4=path_validate(j[2].split(' '),local_asn)
+        path2,path3, path4=path_validate(seg2,local_asn)
         write_out=csv.writer(outputcsv, delimiter='|')
         write_out.writerow([i[0],i[1],i[2],i[3],j[0],path2,path3,path4])
       else:
