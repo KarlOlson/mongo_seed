@@ -139,7 +139,7 @@ def pkt_in(packet):
                             print("validation result is: ", validation_dict)
                             new_csv=[]
                             with open('path.csv', 'a', newline='') as csvfile:
-                               filewriter = csv.writer(csvfile, delimiter=';')
+                               filewriter = csv.writer(csvfile, delimiter='\t')
                                filewriter.writerow([str(segment[0]), str(segment[1]), str(segment[2]), str(validation_dict), perc, plen])
                             print("entering comparor")
                                #reader = csv.reader(csvfile)
