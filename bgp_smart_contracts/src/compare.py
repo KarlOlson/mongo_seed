@@ -51,7 +51,7 @@ def compiler(infile,dump,infile2,outfile,local_asn):
         print ("seg2 is: ",seg2)
         print(i[0],j[0])
         path2,path3, path4=path_validate(seg2,local_asn)
-        write_out=csv.writer(outputcsv, delimiter='|')
+        write_out=csv.writer(outputcsv, delimiter='\t')
         write_out.writerow([i[0],i[1],i[2],i[3],j[0],path2,path3,path4])
       else:
          pass  
