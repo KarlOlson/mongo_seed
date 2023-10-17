@@ -9,11 +9,7 @@ router id {routerId};
 ipv4 table t_direct;
 protocol device {{
 }}
-protocol mrt {{
-        table "t_bgp";
-        filename "/bgp_smart_contracts/src/dump_%M.mrt";
-        period 120;
-}}
+
 protocol kernel {{
     ipv4 {{
         import all;
@@ -57,6 +53,11 @@ RoutingFileTemplates["rnode_bird"] = """\
 router id {routerId};
 ipv4 table t_direct;
 protocol device {{
+}}
+protocol mrt {{
+        table "t_bgp";
+        filename "/bgp_smart_contracts/src/dump_%M.mrt";
+        period 120;
 }}
 protocol kernel {{
     ipv4 {{
