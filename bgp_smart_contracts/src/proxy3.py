@@ -357,7 +357,8 @@ def db_validate(segment):
 if __name__=='__main__':
     global_index = Index() 
     connections = ConnectionTracker()
-
+    svr_req=(db.command("serverStatus")["network"]["numRequests"])
+    svr_time=(db.command("serverStatus")["globalLock"]["totalTime"]/1000000)
     print("Accept Unregistered Advertisements Flag: " + str(ACCEPT_UNREGISTERED_ADVERTISEMENTS))
     complete_time = time.time_ns() // 1_000_000
     # instantiate the netfilter queue
@@ -379,6 +380,7 @@ if __name__=='__main__':
         print("Total db requests: ",requests)
         print("Total duration: ", complete_duration)
         print("requests per second to db: ", (db.command("serverStatus")["network"]["numRequests"]/(db.command("serverStatus")["globalLock"]["totalTime"]/1000000)))
+        print("requests per second since proxy start: ", (db.command("serverStatus")["network"]["numRequests"]-svr_req)/(svr_time-db.command("serverStatus")["globalLock"]["totalTime"]/1000000))
         print("===================================================")
         #print out final performance statistics over full run
         print ("Total Update packets:"+str(proxy_packets1))
