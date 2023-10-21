@@ -380,7 +380,7 @@ if __name__=='__main__':
         print("Total db requests: ",requests)
         print("Total duration: ", complete_duration)
         print("requests per second to db: ", (db.command("serverStatus")["network"]["numRequests"]/(db.command("serverStatus")["globalLock"]["totalTime"]/1000000)))
-        print("requests per second since proxy start: ", (db.command("serverStatus")["network"]["numRequests"]-svr_req)/(svr_time-db.command("serverStatus")["globalLock"]["totalTime"]/1000000))
+        print("requests per second since proxy start: ", (db.command("serverStatus")["network"]["numRequests"]-svr_req)/(db.command("serverStatus")["globalLock"]["totalTime"]-svr_time/1000000))
         print("===================================================")
         #print out final performance statistics over full run
         print ("Total Update packets:"+str(proxy_packets1))
