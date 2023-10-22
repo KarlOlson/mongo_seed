@@ -37,7 +37,7 @@ DockerCompilerFileTemplates['dbImport'] = """\
 #! /bin/bash
 cd mongo_seed
 sleep 3
-mongoimport --host=10.3.0.3 --db='bgp_db' --collection='known_bgp' --file='routingdb.json'
+mongoimport --host=10.3.0.3 --db='bgp_db' --collection='known_bgp' --file='routingdb.json' --jsonArray
 sleep 5
 python3 testingPython.py
 """
