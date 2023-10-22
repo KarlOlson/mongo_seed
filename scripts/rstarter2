@@ -1,0 +1,13 @@
+#!/bin/bash
+
+N=70
+Routers=($(docker ps -f "name=(-router)|(-r[0-9])" -q))
+#PROXY=($(docker ps -f "name=proxy" -q))
+
+
+for router in ${Routers[@]};
+  do  
+    docker exec ${router} sh -c "birdc restart all" 
+    sleep 6
+  done
+

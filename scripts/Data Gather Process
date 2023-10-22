@@ -1,0 +1,13 @@
+Test process:
+1) Build Environment (%) with python script.
+2) Build mongo db (%) with python script and load onto 191 (alt. post on git and build new image)
+3) reload environment to start with new DB info
+4) run proxy3.py
+5) run rstarter script to generate topology changes
+6) pull path.csv and remove duplicates: Data-> more filters->Standard filter.
+	Fieldname: B, Condition: Not empty; AND Column D: notempty; AND Column F Notempty -> options "no duplications"
+7) push path.csv back to host
+8) run compare.py dump.mrt dumpo.csv path.csv blank.csv ASN# to generate dump vs. recieved comparison
+9) run compare.py dump.mrt dumpo2.csv single.csv blank2.csv ASN to generate dump vs. optimal comparison
+10) record proxy3 output metrics.
+

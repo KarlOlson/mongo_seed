@@ -1,0 +1,10 @@
+#!/bin/bash
+
+container=a86c25ad93e5
+sudo docker cp $container:/bgp_smart_contracts/src/path.csv ~/Desktop/mongo_seed-main/scripts/path.csv
+sudo docker cp $container:/bgp_smart_contracts/src/dump.mrt ~/Desktop/mongo_seed-main/scripts/dump.mrt
+sudo docker cp $container:/bgp_smart_contracts/src/single.csv ~/Desktop/mongo_seed-main/scripts/single.csv
+sudo touch pcompare.csv scompare.csv
+python3 compare2.py dump.mrt dumpout.csv path.csv pcompare.csv
+sleep 5
+python3 compare2.py dump.mrt dumpout.csv path.csv scompare.csv
