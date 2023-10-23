@@ -140,7 +140,7 @@ def pkt_in(packet):
                             new_csv=[]
                             with open('path.csv', 'a', newline='') as csvfile:
                                filewriter = csv.writer(csvfile, delimiter='\t')
-                               filewriter.writerow([str(segment[0]), str(segment[1]), str(segment[2]), str(validation_dict), perc, plen])
+                               filewriter.writerow([str(segment[0]), str(segment[1]), str(segment[2]), validation_dict, perc, plen])
                             print("entering comparor")
                                #reader = csv.reader(csvfile)
                                #next(reader, None) # discard the header
@@ -164,23 +164,22 @@ def pkt_in(packet):
                                  for row in new_csv:
                                    print("checking rows in blank_csv")
                                    print(row)
-                                   if (str(row[0]) == str(checker[0]) and float(row[4]) < float(perc)):
+                                   if (str(row[0]) == str(checker[0])) and (float(row[4]) < float(perc)):
                                       print("using if for",checker[0])
                                       filewriter2.writerow([str(checker[0]), str(checker[1]), str(checker[2]), str(checker[3]), checker[4], checker[5]])
                                       countrow+=1
-                                   elif (str(row[0]) == str(checker[0]) and float(row[4]) >= float(perc)):
+                                   elif (str(row[0]) == str(checker[0])) and (float(row[4]) >= float(perc)):
                                       countrow+=1
                                       print("using else for",row[0])
-                                      if str(row[5]) < str(checker[5]):
+                                      if int(row[5]) < int(checker[5]):
                                          filewriter2.writerow([str(row[0]), str(row[1]), str(row[2]), str(row[3]), row[4], row[5]])
                                       else: 
                                          filewriter2.writerow([str(checker[0]), str(checker[1]), str(checker[2]), str(checker[3]), checker[4], checker[5]])
                                    else:
+                                     print("should not get here, but just in case...")
                                      filewriter2.writerow([str(row[0]), str(row[1]), str(row[2]), str(row[3]), row[4], row[5]])
-                                 if countrow>0:
-                                   pass
-                                 else:
-                                   filewriter2.writerow([str(checker[0]), str(checker[1]), str(checker[2]), str(checker[3]), checker[4], checker[5]])   
+                                 if countrow == 0:
+                                    filewriter2.writerow([str(checker[0]), str(checker[1]), str(checker[2]), str(checker[3]), checker[4], checker[5]])   
                                else:
                                  print("first entry, using checker data")
                                  filewriter2 = csv.writer(singlecsv, delimiter='\t' )
