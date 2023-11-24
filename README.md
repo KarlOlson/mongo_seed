@@ -147,3 +147,11 @@ You can use SEED to build a terraform project and then deploy that to google clo
 ### `Hijack/<files>`
 1. `control_plane.sh` shell script to check router control plane for inclusion of malicious routes.
 2. `Random_Hijack.sh` shell script to randomly inject bad advertisement into toplogy.
+
+### Common Compose Build Errors & Fixes
+1. Issue 1: "failed to receive status: rpc error: code = Unknown desc = no such job vv4l06okspiyhkqycw718bao9"
+   a. sol: Disable Docker-buildkit for first build attempt: `sudo DOCKER_BUILDKIT=0 docker compose build` (preferred). Alt: revert to older image: `sudo apt-get install docker-compose-plugin=2.18.1  docker-ce=20.10.22 docker-ce-cli=20.10.22`
+2. Issue 2: "Failed to solve with frontend dockerfile.v0: failed to create LLB definition: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed"
+  a. sol: A bit misleading. its not a login issue (though do try that first just in case). Look up at the build output and you will probably see a '=> ERROR [rs_ix_ix15 internal] load metadata for docker.io/library/327fe19ff4ef591f18bc786e974ff016:latest' with a bunch of cancelled steps. Issue was compose was looking in dummies folder and pulling hash value document as an image and not actually reading the contents of file to build that image. 327fe19ff4ef591f18bc786e974ff016:latest does not exist as an image anywhere on repository or locally yet. Solution: do a manual docker pull <image> and then rename that image to the hash you see in your output. eg. sudo docker image tag karlolson1/mongo:v8 327fe19ff4ef591f18bc786e974ff016. hash values will be different here each topology. its also found in the dummies folder as the filename.
+3. issue 3: not an issue, but if you install docker fresh, there are no locally cached images/layers. pulling image manually and building one of the containers prior to compose seemed to fix some challenges on the newer versions. I just found it easier to downgrade and do above. I think the above solves everything, but FYI if it doesn't
+Last, to prevent system updating docker unexpectedly: sudo apt-mark hold docker-ce docker-ce-cli
